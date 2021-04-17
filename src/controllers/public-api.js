@@ -12,16 +12,36 @@ ctrl.fetchDocuments = async (req, res, next) => {
   }
 
   if (docs.length === 0) {
+    console.log(docs, 'no hay');
     return res.json({
       status: 'NO_CONTENT',
-      message: 'No se encontraron documentos.',
+      message: 'No docs found',
     });
   }
 
+  console.log('No lo hizo xDD');
+
   return res.json({
     status: 'OK',
-    message: `Se encontraron ${docs.length} documentos`,
+    message: `${docs.length} docs found`,
     docs,
+  });
+};
+
+ctrl.fetchDocumentById = async (req, res, next) => {
+  const { id } = req.params;
+
+  const doc = await Doc.findById(id).lean();
+
+  if (!doc)
+    return res.status(404).json({
+      status: 'NOT_FOUND',
+      message: `No existe docuemento con id: ${id}`,
+    });
+
+  return res.json({
+    status: 'OK',
+    doc: doc,
   });
 };
 
@@ -41,7 +61,7 @@ ctrl.createDocument = async (req, res, next) => {
 
   return res.json({
     status: 'OK',
-    message: `El documento fue creado exitosamente con id: ${newDoc._id}`,
+    message: `Doc created successfully with ID: ${newDoc._id}`,
     doc: newDoc.toJSON(),
   });
 };
@@ -60,7 +80,7 @@ ctrl.updateDocument = async (req, res, next) => {
   if (!doc)
     return res.status(404).json({
       status: 'NOT_FOUND',
-      message: `No se encontró documento con id: ${id}`,
+      message: `Not found doc with ID: ${id}`,
     });
 
   doc.set({
@@ -76,7 +96,7 @@ ctrl.updateDocument = async (req, res, next) => {
 
   return res.json({
     status: 'OK',
-    message: 'El documento se ha actualizado exitosamente.',
+    message: 'Doc has been updated successfully',
     doc,
   });
 };
@@ -94,12 +114,12 @@ ctrl.deleteDocument = async (req, res, next) => {
   if (!doc)
     return res.status(404).json({
       status: 'NOT_FOUND',
-      message: `No se encontro documento con id: ${id}`,
+      message: `Not found doc with ID: ${id}`,
     });
 
   return res.json({
     status: 'OK',
-    message: `Se eliminó el documento con id ${id} exitosamente`,
+    message: `Doc with ID: ${id} DELETED successfully `,
     doc,
   });
 };

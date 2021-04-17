@@ -5,11 +5,17 @@ const {
   createDocument,
   updateDocument,
   deleteDocument,
+  fetchDocumentById
 } = require('../controllers/public-api');
 
-router
+router 
   .route('/doc')
   .get(fetchDocuments)
+  .post(createDocument);
+
+router
+  .route('/doc/:id')
+  .get(fetchDocumentById)
   .post(createDocument)
   .put(updateDocument)
   .delete(deleteDocument);

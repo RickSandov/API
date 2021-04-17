@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const DB_URI = process.env.DB_URI || 'mongodb://localhost/crud-api';
+const DB_URI = process.env.DB_URI || 'mongodb://localhost/api_project';
 
 mongoose.connect(DB_URI, {
   useCreateIndex: true,

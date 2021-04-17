@@ -1,6 +1,8 @@
 // Modules
 const express = require('express');
 const methOverride = require('method-override');
+const morgan = require('morgan');
+const cors = require('cors');
 
 // Inits
 const app = express();
@@ -17,9 +19,11 @@ const publicApiRoutes = require('./routes/public-api.routes');
 app.set('port', process.env.PORT || 3000);
 
 // Middlewares
-app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 app.use(express.json({}));
+app.use(express.urlencoded({ extended: false }));
 app.use(methOverride('_method'));
+app.use(morgan('dev'));
 
 // Globals
 /* app.use((req, res, next) => {

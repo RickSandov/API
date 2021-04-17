@@ -6,14 +6,14 @@ module.exports = (err, req, res, next) => {
   if (err.name === 'MongoError') {
     return res.status(500).json({
       status: 'DATABASE_ERROR',
-      message: err.message || 'Ocurrio un error con la base de datos',
+      message: err.message || 'ERROR IN DATABASE',
       err,
     });
   }
 
   return res.status(500).json({
     status: 'SERVER_ERROR',
-    message: err.message || 'Ocurrio un error en el servidor.',
+    message: err.message || 'ERROR IN SERVER',
     err,
   });
 };
