@@ -12,14 +12,11 @@ ctrl.fetchDocuments = async (req, res, next) => {
   }
 
   if (docs.length === 0) {
-    console.log(docs, 'no hay');
     return res.json({
       status: 'NO_CONTENT',
       message: 'No docs found',
     });
   }
-
-  console.log('No lo hizo xDD');
 
   return res.json({
     status: 'OK',
@@ -36,7 +33,7 @@ ctrl.fetchDocumentById = async (req, res, next) => {
   if (!doc)
     return res.status(404).json({
       status: 'NOT_FOUND',
-      message: `No existe docuemento con id: ${id}`,
+      message: `Doc with ID: ${id} doesn't exist`,
     });
 
   return res.json({

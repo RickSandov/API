@@ -15,4 +15,3 @@ mongoose.connect(DB_URI, {
 
 module.exports.default = mongoose;
 
-module.exports.connection = mongoose.connection;
